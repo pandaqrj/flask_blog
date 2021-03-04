@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+
+
+
+
+</head>
+
+<body>
+    <!-- 新 Bootstrap4 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link href="./static/css/CK.css" type="text/css" rel="stylesheet">
+    <link href="./static/css/style.css" type="text/css" rel="stylesheet">
+    <div id="app">
+
+
+        <header class="header mb30">
+
+            <div class="top-bar d-sm-block py-1">
+                <div class="container">
+                    <div class="row my-1">
+                        <div class="col">
+                            <div class="float-right btn-group" role="group">
+                                <a class="btn btn-secondary" v-if="author_id == -1" href="login.html">
+                                    <svg class="bi bi-person-fill" width="1.3em" height="1.3em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                    </svg>
+                                </a>
+                                <a class="btn btn-secondary" v-if="author_id > 0" href="/apis/auth/logout">
+                                    <svg class="bi bi-box-arrow-right" width="1.3em" height="1.3em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M11.646 11.354a.5.5 0 0 1 0-.708L14.293 8l-2.647-2.646a.5.5 0 0 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0z" />
+                                        <path fill-rule="evenodd"
+                                            d="M4.5 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z" />
+                                        <path fill-rule="evenodd"
+                                            d="M2 13.5A1.5 1.5 0 0 1 .5 12V4A1.5 1.5 0 0 1 2 2.5h7A1.5 1.5 0 0 1 10.5 4v1.5a.5.5 0 0 1-1 0V4a.5.5 0 0 0-.5-.5H2a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5v-1.5a.5.5 0 0 1 1 0V12A1.5 1.5 0 0 1 9 13.5H2z" />
+                                    </svg>
+                                </a>
+                                <a class="btn btn-secondary" v-if="author_id > 0" href="#" data-toggle="modal"
+                                    data-target="#exampleModal" data-type="Create New Topic">
+                                    <svg class="bi bi-pen" width="1.3em" height="1.3em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M5.707 13.707a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391L10.086 2.5a2 2 0 0 1 2.828 0l.586.586a2 2 0 0 1 0 2.828l-7.793 7.793zM3 11l7.793-7.793a1 1 0 0 1 1.414 0l.586.586a1 1 0 0 1 0 1.414L5 13l-3 1 1-3z" />
+                                        <path fill-rule="evenodd"
+                                            d="M9.854 2.56a.5.5 0 0 0-.708 0L5.854 5.855a.5.5 0 0 1-.708-.708L8.44 1.854a1.5 1.5 0 0 1 2.122 0l.293.292a.5.5 0 0 1-.707.708l-.293-.293z" />
+                                        <path
+                                            d="M13.293 1.207a1 1 0 0 1 1.414 0l.03.03a1 1 0 0 1 .03 1.383L13.5 4 12 2.5l1.293-1.293z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="navbar navbar-expand-sm navbar-dark" id="navbar-1">
+                <div class="container">
+                    <a class="navbar-brand" href="#">
+                        <h3 class="display-4">Rj</h1>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navcoll">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navcoll">
+                        <div class="navbar-nav ml-auto">
+                            <a class="nav-item nav-link m-1 active" href="#">HOME</a>
+                            <a class="nav-item nav-link m-1" href="#">FEATURES</a>
+                            <a class="nav-item nav-link m-1" href="#">PRICING</a>
+
+                            <div class="nav-item dropdown m-1">
+                                <a class="nav-link dropdown-toggle" href="#" data-display="static" id="navdropdown"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    PAGES
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-sm-left rounded " id="pages"
+                                    aria-labelledby="navdropdown">
+
+                                    <a class="dropdown-item px-2 text-light rounded" href="#">CONCAT ME</a>
+                                    <a class="dropdown-item px-2 text-light rounded" href="#">OTHER</a>
+                                </div>
+                            </div>
+
+                            <div class="nav-item dropdown m-1">
+                                <a class="nav-link dropdown-toggle" href="#" id="topbardropdown" data-toggle="dropdown"
+                                    data-display="static" aria-haspopup="true" aria-expanded="false">
+                                    <svg class="bi bi-search" width="1em" height="1em" viewBox="0 0 16 16"
+                                        fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                        <path fill-rule="evenodd"
+                                            d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                                    </svg>
+                                </a>
+                                <form action="index.html"
+                                    class="top-bar-search form-inline dropdown-menu bg-transparent p-0 dropdown-menu-right"
+                                    aria-labelledby="topbardropdown">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text" placeholder="Search"
+                                            aria-label="Search">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" type="submit">✓</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <section class="">
+            <div class="container mb30">
+                <div class="row">
+                    <div class="col text-center">
+                        <h1>只是一些微小的工作 . . . <img height="45" src="static/pic/nerd-face_1f913.png"></h1>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="mb30" v-for="(topic,index) in topic_list1">
+                            <div class="card bg-dark shadow">
+
+                                <img class="card-img-top bg-secondary shadow-lg" src="">
+
+                                <div class="position-absolute m-2 p-1 dropdown topicmenu-btn rounded"
+                                    v-if="topic.author_id == author_id">
+                                    <a class="text-dark" id="topicmenu" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" data-reference="parent" href="#">
+                                        <svg class="bi bi-three-dots" width="32" height="32" viewBox="0 0 16 16"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                        </svg>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="topicmenu">
+                                        <button class="dropdown-item text-dark p-1 rounded" style="padding: 0;"
+                                            data-toggle="modal" data-target="#exampleModal" v-bind:data-id="topic.id"
+                                            v-bind:data-title="topic.title" v-bind:data-body="topic.body"
+                                            data-type="Edit Topic">
+                                            <svg class="bi bi-pencil-square" width="32" height="32" viewBox="0 0 16 16"
+                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                        </button>
+                                        <form v-bind:action="['/apis/'+topic.id+'/delete']" method="post">
+                                            <button class="dropdown-item text-dark p-1 rounded" style="padding: 0;"
+                                                onclick="return confirm('Are you sure?');" type="submit">
+                                                <svg class="bi bi-trash-fill" width="32" height="32" viewBox="0 0 16 16"
+                                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <h3 class="card-title text-light">
+                                        {{ topic.title }}
+                                    </h3>
+
+                                    <hr class="bg-secondary">
+                                    <div class="card-text">
+                                        <p class="ck-content" style="white-space: pre-wrap;" v-html="topic.body"></p>
+                                    </div>
+                                    <small>
+                                        <span class="float-left">
+                                            <svg class="bi bi-chat-square-dots-fill" width="1em" height="1em"
+                                                viewBox="0 0 16 16" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                            </svg>
+                                            Comments: <a href="#">16</a>
+                                            <svg class="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            </svg>
+                                            Category: <a href="#">spark</a>
+                                        </span>
+                                        <span class="float-right">
+                                            <svg class="bi bi-clock-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                            </svg> {{ topic.created }}
+                                        </span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="mb30" v-for="(topic,index) in topic_list2">
+                            <div class="card bg-dark shadow">
+                                <img class="card-img-top bg-secondary shadow-lg" src="">
+
+                                <div class="position-absolute m-2 p-1 dropdown topicmenu-btn rounded"
+                                    v-if="topic.author_id == author_id">
+                                    <a class="text-dark" id="topicmenu" data-toggle="dropdown" aria-haspopup="true"
+                                        aria-expanded="false" data-reference="parent" href="#">
+                                        <svg class="bi bi-three-dots" width="32" height="32" viewBox="0 0 16 16"
+                                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
+                                        </svg>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="topicmenu">
+                                        <button class="dropdown-item text-dark p-1 rounded" style="padding: 0;"
+                                            data-toggle="modal" data-target="#exampleModal" v-bind:data-id="topic.id"
+                                            v-bind:data-title="topic.title" v-bind:data-body="topic.body"
+                                            data-type="Edit Topic">
+                                            <svg class="bi bi-pencil-square" width="32" height="32" viewBox="0 0 16 16"
+                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                                                <path fill-rule="evenodd"
+                                                    d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                                            </svg>
+                                        </button>
+                                        <form v-bind:action="['/apis/'+topic.id+'/delete']" method="post">
+                                            <button class="dropdown-item text-dark p-1 rounded" style="padding: 0;"
+                                                onclick="return confirm('Are you sure?');" type="submit">
+                                                <svg class="bi bi-trash-fill" width="32" height="32" viewBox="0 0 16 16"
+                                                    fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd"
+                                                        d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                                </svg>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <h3 class="card-title text-light">
+                                        {{ topic.title }}
+                                    </h3>
+
+                                    <hr class="bg-secondary">
+                                    <div class="card-text">
+                                        <p class="ck-content" style="white-space: pre-wrap;" v-html="topic.body"></p>
+                                    </div>
+                                    <small>
+                                        <span class="float-left">
+                                            <svg class="bi bi-chat-square-dots-fill" width="1em" height="1em"
+                                                viewBox="0 0 16 16" fill="currentColor"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.5a1 1 0 0 0-.8.4l-1.9 2.533a1 1 0 0 1-1.6 0L5.3 12.4a1 1 0 0 0-.8-.4H2a2 2 0 0 1-2-2V2zm5 4a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                            </svg>
+                                            Comments: <a href="#">16</a>
+                                            <svg class="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            </svg>
+                                            Category: <a href="#">spark</a>
+                                        </span>
+                                        <span class="float-right">
+                                            <svg class="bi bi-clock-fill" width="1em" height="1em" viewBox="0 0 16 16"
+                                                fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd"
+                                                    d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z" />
+                                            </svg> {{ topic.created }}
+                                        </span>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal -->
+            <div class="modal fade " id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content etdit-page">
+                        <div class="modal-header bg-dark" style="border-bottom: 0ex;">
+                            <h3 class="modal-title" id="exampleModalLabel">Info</h5>
+                                <button type="button" class="close text-light" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                        </div>
+
+                        <form action="" method="POST">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <textarea class="form-control text-light" id="title" name="title"
+                                        placeholder="标题"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <textarea class="editor text-light bg-transparent" id="body" name="body"
+                                        placeholder="在这里填写文字">
+                                    </textarea>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer border-top border-dark">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+
+
+        <footer class="footer text-white-50">
+            <div class="container">
+                <div class="row mb60">
+                    <div class="col-xl-2 col-md-6 mb30">
+                        <div class="text-widget widget">
+                            <div class="widget-content">
+                                <h1 class="display-1 text-light">R j</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb30">
+                        <div class="text-widget widget">
+                            <h4 class="widget-title mb40 text-light">Location</h4>
+                            <div class="widget-content">
+                                <p>数据的搬运工,咸鱼wow党
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 mb30">
+                        <div class="useful-link-widget widget">
+                            <h4 class="widget-title mb40 text-light">Pages</h4>
+                            <div class="widget-content">
+                                <div class="useful-link-list">
+                                    <div class="row">
+                                        <div class="col-6 pr-0">
+                                            <ul class="list-unstyled">
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">404</a></li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Blog</a></li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">About Us</a>
+                                                </li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Contact</a>
+                                                </li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Social
+                                                        Media</a>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                        <div class="col-6 pr-0">
+                                            <ul class="list-unstyled">
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Company</a>
+                                                </li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Latest
+                                                        Courses</a>
+                                                </li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Partners</a>
+                                                </li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Blog Post</a>
+                                                </li>
+                                                <li><i class="mr-1"></i><a class="text-white-50" href="#">Help Topic</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb30">
+                        <div class="mailing-widget widget">
+                            <h4 class="widget-title mb40 text-light">Mailing List</h4>
+                            <div class="content-wiget">
+                                <p class="mb40">Subscribe to our newsletter for the latest updates and offers.</p>
+                                <form action="index.html">
+                                    <div class="input-group">
+                                        <input class="form-control" placeholder="Email address" type="text">
+                                        <span class="input-group-btn"><input class="btn btn-secondary" type="submit"
+                                                value="✓"></span>
+                                    </div>
+                                </form>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row sub-footer">
+                    <div class="col-md-6 footer-social">
+                        <a class="facebook" href="#">Facebook</a>
+                        <a class="google" href="#">Google</a>
+                        <a class="twitter" href="#">Twitter</a>
+                        <a class="pinterest" href="#">Pinterest</a>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <p class="copyright"><small>© 2019. Designed and Developed by <a
+                                    href="http://www.distinctivethemes.com" target="_blank">Distinctive
+                                    Themes</a></small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+        <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+        <!-- bootstrap.bundle.min.js 用于弹窗、提示、下拉菜单，包含了 popper.min.js -->
+        <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+        <!-- 最新的 Bootstrap4 核心 JavaScript 文件 -->
+        <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+        <script src="static/js/ckeditor.js"></script>
+        <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+        <script src="static/js/index.js"></script>
+    </div>
+
+</body>
+
+</html>
